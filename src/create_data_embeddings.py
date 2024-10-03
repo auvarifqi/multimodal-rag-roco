@@ -1,14 +1,19 @@
 import os
 import uuid
+import sys
+
 
 import pandas as pd
 from fastembed import TextEmbedding, ImageEmbedding
 from qdrant_client import QdrantClient, models
 
-from src.embeddings_utils import convert_text_to_embeddings, convert_image_to_embeddings, TEXT_MODEL_NAME, \
+# Add the `src` directory to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from embeddings_utils import convert_text_to_embeddings, convert_image_to_embeddings, TEXT_MODEL_NAME, \
    IMAGE_MODEL_NAME
 
-DATA_PATH = './data/'
+DATA_PATH = '/Users/auva/Documents/GitHub/multimodal-rag-roco/data/'
 
 def create_uuid_from_image_id(image_id):
    NAMESPACE_UUID = uuid.UUID('12345678-1234-5678-1234-567812345678')
@@ -16,7 +21,7 @@ def create_uuid_from_image_id(image_id):
 
 def create_embeddings(collection_name):
    # Read captions txt data
-   path = DATA_PATH + 'captions.txt'
+   path = DATA_PATH + 'datacaptions.txt'
    caption_df = pd.read_csv(path, sep='\t', header=None, names=['image_id', 'caption'])
 
 
