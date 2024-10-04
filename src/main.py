@@ -23,12 +23,13 @@ def chatbot_interface(user_query, user_image=None):
 # Create the Gradio interface with text input and image input
 interface = gr.Interface(
    fn=chatbot_interface,
-   inputs=[gr.components.Textbox(lines=5, label="User Query"), gr.components.Image(label="Upload Medical Image")],
-   outputs=gr.components.Textbox(),
+    inputs=[gr.components.Textbox(lines=5, label="Your Question ✨"), 
+            gr.components.Image(label="Upload a Medical Image 🩺")],
+    outputs=gr.components.Textbox(label="AI Response 💬"),
    title="Medical Assistant",
-   description="Just ask your medical-related questions and upload relevant medical images for analysis"
+   description="Ask anything medical-related and upload images for a smart diagnosis!",
 )
 
 # Launch the Gradio interface
 if __name__ == "__main__":
-   interface.launch()
+   interface.launch(share=False)

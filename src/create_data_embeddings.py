@@ -6,6 +6,7 @@ import sys
 import pandas as pd
 from fastembed import TextEmbedding, ImageEmbedding
 from qdrant_client import QdrantClient, models
+from config import Config
 
 # Add the `src` directory to the Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -60,8 +61,11 @@ def create_embeddings(collection_name):
        image_docs[idx]['image_embedding'] = embedding
 
 
+    
    # Save the embeddings to vector database
-   client = QdrantClient(":memory:")
+   QDRANT_API_KEY = Config.QDRANT_API_KEY
+   QDRANT_HOST = Config.QDRANT_HOST
+   client = QdrantClient(url=QDRANT_HOST, api_key=QDRANT_API_KEY)
 
 
    text_model = TextEmbedding(model_name=TEXT_MODEL_NAME)
